@@ -1,0 +1,10 @@
+.form-container{
+  max-width: 500px;
+  margin: 36px auto 0 auto;
+  display: grid;
+  align-items: center;
+  border: 1px solid var(--gray);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+}

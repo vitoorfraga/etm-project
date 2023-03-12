@@ -1,0 +1,16 @@
+.page-title{
+    font-size: 3.2rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.page-title::after{
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+
+    width: 80px;
+    height: 4px;
+    background-color: var(--purple);
+}

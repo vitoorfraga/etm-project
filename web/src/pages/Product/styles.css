@@ -1,0 +1,19 @@
+.return-alert{
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 8px;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.return-alert span{
+  margin-top: 0px;
+  color: var(--text-color-1);
+}
+
+.return-alert img{
+  width: 16px;
+}

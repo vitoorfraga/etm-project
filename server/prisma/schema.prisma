@@ -12,22 +12,22 @@ datasource db {
 
 // => Tabela de usuários
 model User {
-  id                      String       @id @default(uuid())
-  firstName               String
-  lastName                String
-  email                   String    @unique
-  password                String    
-  passwordResetToken      String?
-  passwordResetExpires    DateTime?
-  createdAt               DateTime  @default(now())
+  id                   String    @id @default(uuid())
+  firstName            String
+  lastName             String
+  email                String    @unique
+  password             String
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+  createdAt            DateTime  @default(now())
 }
 
 // => Tabelas do banco de dados.
 model Product {
-  id            Int     @id @default(autoincrement())
-  name          String
-  size          String
-  price         Int
-  quantity      Int
-  category      String
+  id       Int    @id @default(autoincrement())
+  name     String
+  size     String
+  price    Float
+  quantity Int
+  category String
 }

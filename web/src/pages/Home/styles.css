@@ -1,0 +1,15 @@
+.storage-page{
+  width: 100%;
+}
+
+.product-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+}
+
+.search-bar{
+  margin-top: 46px;
+  width: 400px;
+}

@@ -1,0 +1,22 @@
+.button{
+  margin-top: 32px;
+  font-size: 1.6rem;
+  color: var(--text-color-1);
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border: 1px solid var(--gray);
+
+
+  padding: 16px 8px;
+  border-radius: 8px;
+  display: block;
+
+  transition: background .3s ease;
+}
+
+.button:hover{
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--purple);
+}

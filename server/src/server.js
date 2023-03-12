@@ -1,13 +1,16 @@
 import express, { request, response } from "express";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors"
 import authController from "./app/controllers/authController.js";
 import storageController from "./app/controllers/storageController.js";
+
 
 
 const app = express();
 const prisma = new PrismaClient // Chamar o banco de dados.
 app.use(express.json()); // Permite que o servidor entenda quando enviarmos uma requisição JSON.
 app.use(express.urlencoded({extended: false})); // Para decodificar os parametros enviados via URL.
+app.use(cors())
 
 
 authController(app)
@@ -52,7 +55,7 @@ app.delete("/etm-delete-product/:id", async (request, response) => {
   })
 
   return response.json({
-    message: "Produto deletado com sucesso 👌",
+    message: "Produto deletado com sucesso 👌.",
     data: deletedProduct
   });
 })
@@ -74,10 +77,24 @@ app.patch("/etm-update-product/:id", async (request, response) => {
     }
   })
 
-  return response.json({
-    message: "Produto atualizado com sucesso 👌",
-    data: updatedProduct
-  });
+  return response.status(200).send({
+    message: "Produto Atualizado com sucesso 👌.",
+    updatedProduct
+  })
+})
+
+// => Pegar um produto especifico do banco de dados
+app.get("/etm-product/:id", async (request, response) => {
+
+  const {id} = request.params;
+
+  const product = await prisma.product.findUnique({
+    where: {id: parseInt(id)}
+  })
+
+  return response.status(200).send({
+    product
+  })
 })
 
 app.listen(3000, () => console.log("👌 Running...")) // Definindo a porta que o servidor será executado.

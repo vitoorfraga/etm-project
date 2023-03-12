@@ -1,0 +1,33 @@
+.form-field{
+	display: flex;  
+	flex-direction: column;
+	width: 100%;
+	position: relative;
+}
+
+.form-field label{
+	font-size: 1.6rem;
+	margin-bottom: 8px;
+}
+
+.form-field input, .form-field select{
+	height: 40px;
+	outline: none;
+	border: 1px solid var(--gray);
+	border-radius: 8px;
+	box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+	padding: 8px;
+
+	transform: border .3s ease;
+}
+
+.form-field input:focus, .form-field select:focus{
+	border-color: var(--purple);
+}
+
+.money-prefixo{
+	position: absolute;
+	bottom: 10px;
+	left: 8px;
+	font-size: 1.4rem;
+}
