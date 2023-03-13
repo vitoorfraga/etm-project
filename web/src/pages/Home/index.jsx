@@ -14,10 +14,19 @@ function Home() {
   const [loadingData, setLoadingData] = useState(true)
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/etm-storage`)
-    .then(response => {
-      setProducts(response.data);
+    const token = JSON.parse(localStorage.getItem("user_token"))
+
+    axios.get(`http://localhost:3000/storage/`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(res => {
       setLoadingData(false)
+      setProducts(res.data.products)
+    })
+    .catch(err => {
+      console.log(err)
     })
   }, [])
 

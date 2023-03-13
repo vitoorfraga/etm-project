@@ -2,14 +2,23 @@ import axios from "axios";
 
 // => Create Product
 export async function createProduct(name, price, quantity, size, category){
-  console.log("ativou a função")
-  const response = await axios.post(`http://localhost:3000/etm-create-product`, {
+  const token = window.localStorage.getItem("user_token")
+  const data ={
     name: name,
     size: size,
     price: price,
     quantity: quantity,
     category: category,
-  })
+  }
+
+  const response = await axios.post(`http://localhost:3000/storage/create-product`, data, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  },
+
+  )
+  console.log(response)
   return response
 }
 

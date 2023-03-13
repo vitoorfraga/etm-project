@@ -1,8 +1,18 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/auth';
 import "./styles.css"
 
 function Header() {
+
+  const navigate = useNavigate();
+  const {handleLogout} = useContext(AuthContext);
+
+  function handleClick() {
+    console.log('clicou')
+    handleLogout();
+    return navigate("/login")
+  }
 
   return (
     <header>
@@ -18,23 +28,10 @@ function Header() {
               <NavLink to={"/new-product"}>Adicionar Produto</NavLink>
             </nav>
 
-        <div className="exit-button">Sair</div>
+        <div onClick={handleClick} className="exit-button">Sair</div>
         </div>
     </header>
   );
 }
 
 export default Header;
-
-// {/* <NavLink
-//                     to={`contacts/${contact.id}`}
-//                     className={({ isActive, isPending }) =>
-//                       isActive
-//                         ? "active"
-//                         : isPending
-//                         ? "pending"
-//                         : ""
-//                     }
-//                   >
-//                     {/* other code */}
-//                   </NavLink> */}

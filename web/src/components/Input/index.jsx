@@ -11,7 +11,6 @@ function Input({id, label, type, value, setValue, name, ref, ...rest}) {
         type={type} 
         value={value}
         name={name}
-        ref={ref}
         onChange={({ target }) => setValue(target.value)}
         {...rest}
         />
