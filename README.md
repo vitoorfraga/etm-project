@@ -3,7 +3,7 @@ Sistema de gerenciamento de estoque personalizado para a Top Models.
 
 A Top Models é uma empresa de pequeno porte localizado na zona-oeste de São Paulo. A empresa possui como objetivo vender roupas a um preço acessivel principalmente para a região do butantã.
 
-## Integrantes do projeto
+## Desenvolvedores 🧑🏻‍💻
 * Eduardo Cruz Rodrigues- RA: 2100992
 * Hercules Rodrigues dos Santos - 2101149
 * Vitor Fraga Pereira da Silva - RA: 2100900
