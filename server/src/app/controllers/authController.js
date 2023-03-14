@@ -53,7 +53,6 @@ router.post('/register', async (request, response) => {
     });
 
   } catch (error) {
-    console.log(request.body)
     console.log(error)
     return response.status(400).send({ error: 'Registration failed' })
   }
