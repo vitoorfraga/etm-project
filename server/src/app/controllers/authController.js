@@ -126,6 +126,7 @@ router.post('/forgot_password', async (request, response) => {
   }
 })
 
+
 export default function (app) {
   app.use('/auth', router)
 }

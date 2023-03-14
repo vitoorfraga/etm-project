@@ -24,7 +24,7 @@ app.post('/etm-create-product', async (request, response) => {
     data: {
       name: name,
       size: size,
-      price: parseInt(price),
+      price: parseFloat(price),
       quantity: parseInt(quantity),
       category: category
     },
@@ -39,26 +39,15 @@ app.post('/etm-create-product', async (request, response) => {
 // => Pegar todos os produtos do estoque
 app.get("/etm-storage", async (request, response) => {
   const allProducts = await prisma.product.findMany();
+  console.log("Essa rota")
 
-  return response.json(allProducts);
-})
-
-// => Deletar produto do banco de dados
-app.delete("/etm-delete-product/:id", async (request, response) => {
-  
-  const id = request.params.id;
-
-  const deletedProduct = await prisma.product.delete({
-    where: {
-      id: parseInt(id)
-    }
-  })
-
-  return response.json({
-    message: "Produto deletado com sucesso 👌.",
-    data: deletedProduct
+  return response.status(200).send({
+    user: request.userId,
+    allProducts
   });
 })
+
+
 
 // => Atualizar um produto
 app.patch("/etm-update-product/:id", async (request, response) => {
@@ -71,7 +60,7 @@ app.patch("/etm-update-product/:id", async (request, response) => {
     data: {
       name: name,
       size: size,
-      price: parseInt(price),
+      price: parseFloat(price),
       quantity: parseInt(quantity),
       category: category
     }

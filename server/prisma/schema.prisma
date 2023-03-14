@@ -20,6 +20,7 @@ model User {
   passwordResetToken   String?
   passwordResetExpires DateTime?
   createdAt            DateTime  @default(now())
+  products             Product[]
 }
 
 // => Tabelas do banco de dados.
@@ -30,4 +31,7 @@ model Product {
   price    Float
   quantity Int
   category String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
