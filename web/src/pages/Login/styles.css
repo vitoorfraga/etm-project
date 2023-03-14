@@ -4,6 +4,7 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 55% 45%;
+  align-items: center;
   overflow: hidden;
 }
 
@@ -20,17 +21,21 @@
 }
 
 .auth-content{
-  width: 80%;
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.auth-content#register{
+  margin-top: -200px;
 }
 
 .form-login{
+  width: 500px;
   border-radius: 8px;
   padding: 8px;
-  margin-top: 16px;
   display: grid;
   gap: 8px;
 }

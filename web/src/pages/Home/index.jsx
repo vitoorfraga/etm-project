@@ -23,6 +23,7 @@ function Home() {
     })
     .then(res => {
       console.log(res)
+      console.log(res.data.products.length)
       setLoadingData(false)
       setProducts(res.data.products)
     })
@@ -61,7 +62,9 @@ function Home() {
 
           );
         })}
+
         </div>
+        {products.length === 0 && <p style={{background: "#e9e9e9", fontSize: "1.4rem", width: "fit-content", padding: "8px"}}>Você ainda não possui produtos cadastrados 🤔.</p>}
         {/* <table className='table-products-list'>
           <thead className='table-header'>
             <th>Produto</th>

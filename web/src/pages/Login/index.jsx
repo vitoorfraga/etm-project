@@ -33,7 +33,8 @@ function Login() {
     else{
       try {
         const res = await handleLogin(user, password)
-        console.log("Mandou usuário")
+        console.log('entrou aqui')
+        navigate("/login")
       }
       catch(error){
         setError(error)

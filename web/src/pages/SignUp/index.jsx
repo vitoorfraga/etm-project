@@ -34,7 +34,8 @@ function SignUp() {
     else{
       try {
         const res = await handleRegister(user, name, lastName, password)
-        navigate("/login")
+        console.log(res)
+        // navigate("/login")
       }
       catch(error){
         setError(error)
@@ -46,7 +47,7 @@ function SignUp() {
   return (
     <div className='auth-screen'>
 
-      <section className='auth-content'>
+      <section className='auth-content' id='register'>
         <PageTitle text={`Registre-se`}/>
         <form className='form-login' onSubmit={(e) => handleSubmit(e)}>
           <Input

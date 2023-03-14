@@ -37,13 +37,14 @@ export function AuthProvider ({children}) {
   async function handleRegister(email, name, lastname, password){
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/authenticate", {
+      const res = await axios.post("http://localhost:3000/auth/register", {
         email: email,
         firstName: name,
         lastName: lastname,
         password: password
       })
 
+      window.location = "/login"
       return res
     }
 
