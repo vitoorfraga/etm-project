@@ -7,49 +7,58 @@ export const AuthContext = React.createContext();
 
 export function AuthProvider ({children}) {
 
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(false);
 
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true)
-
-
-  useEffect(() => {
-    const token = localStorage.getItem("user_token");
-    
-    if(!!token){
-      // window.location.href = "/login"
-    }
-    else{
-      null
-    }
-  }, [])
 
   async function handleLogin(user, password){
+
+    console.log(user, password)
     try{
       const res = await axios.post("http://localhost:3000/auth/authenticate", {
         email: user,
         password: password
       })
 
-
       const token = res.data.token;
 
       window.localStorage.setItem("user_token", JSON.stringify(token));
       axios.defaults.headers = token;
 
-      return res
+      return window.location.href = "/"
     }
     catch(error) {
+      console.log('retornou erro')
       return error
     }
 
   }
+
+  async function handleRegister(email, name, lastname, password){
+
+    try {
+      const res = await axios.post("http://localhost:3000/auth/authenticate", {
+        email: email,
+        firstName: name,
+        lastName: lastname,
+        password: password
+      })
+
+      return res
+    }
+
+    catch(error) {
+      console.log(error)
+    }
+
+    }
 
   async function handleLogout(){
     localStorage.removeItem("user_token")
   }
 
   return(
-    <AuthContext.Provider value={{authenticated, handleLogin, handleLogout}}>
+    <AuthContext.Provider value={{handleLogin, handleRegister, handleLogout}}>
         {children}
     </AuthContext.Provider>
   )

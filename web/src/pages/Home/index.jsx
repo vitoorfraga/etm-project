@@ -22,6 +22,7 @@ function Home() {
       }
     })
     .then(res => {
+      console.log(res)
       setLoadingData(false)
       setProducts(res.data.products)
     })

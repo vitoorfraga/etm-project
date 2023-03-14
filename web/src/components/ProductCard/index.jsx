@@ -44,7 +44,7 @@ function ProductCard({id ,title, price, category, quantity}) {
       </div>
       <div className='product-body'>
           <span>Id: <span>{id}</span></span>
-          <span>Preço: <span> R${price}</span></span>
+          <span>Preço: <span> R${`${price}`}</span></span>
           <span>Quantidade: <span>{quantity}</span></span>
           <span>Categoria: <span>{category}</span></span>
         <div>

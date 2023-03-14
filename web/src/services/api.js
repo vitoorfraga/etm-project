@@ -2,7 +2,7 @@ import axios from "axios";
 
 // => Create Product
 export async function createProduct(name, price, quantity, size, category){
-  const token = window.localStorage.getItem("user_token")
+  const token = JSON.parse(localStorage.getItem("user_token"))
   const data ={
     name: name,
     size: size,
@@ -37,7 +37,11 @@ export async function updateProduct(id, name, price, quantity, size, category){
 
 // => Delete Product
 export async function deleteProduct(id){
-  const response = await axios.delete(`http://localhost:3000/etm-delete-product/${id}`)
+  const token = JSON.parse(localStorage.getItem("user_token"))
+  const response = await axios.delete(`http://localhost:3000/storage/etm-delete-product/${id}`, {
+    headers: {
+    "Authorization": `Bearer ${token}`
+  }})
 
   return response
 }

@@ -11,7 +11,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
   
 function EditProductForm({id}) {
-
   const sizeOptions = [
     {name: 'P', value: "p"},
     {name: 'M', value: "m"},
@@ -51,16 +50,26 @@ function EditProductForm({id}) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/etm-product/${id}`)
-    .then(res => {
-      setName(res.data.product.name);
-      setPrice(res.data.product.price);
-      setQuantity(res.data.product.quantity);
-      setSize(res.data.product.size);
-      setCategory(res.data.product.category);
 
-      setIsLoading(false)
-    })
+    const token = JSON.parse(localStorage.getItem("user_token"))
+
+    if(token){
+      axios.get(`http://localhost:3000/storage/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        console.log(res)
+        setName(res.data.product.name);
+        setPrice(res.data.product.price);
+        setQuantity(res.data.product.quantity);
+        setSize(res.data.product.size);
+        setCategory(res.data.product.category);
+  
+        setIsLoading(false)
+      })
+    }
   }, [])
 
 

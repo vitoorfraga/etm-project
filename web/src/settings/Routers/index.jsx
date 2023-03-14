@@ -1,42 +1,44 @@
-import React, { useContext, useEffect } from 'react';
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/auth';
+import React, { useContext, useEffect, useState } from 'react';
+import { createBrowserRouter, Navigate, RouterProvider, useNavigate } from 'react-router-dom';
+import { AuthContext, AuthProvider } from '../../contexts/auth';
 import Home from '../../pages/Home';
 import Login from '../../pages/Login';
 import NewProduct from '../../pages/NewProduct';
 import Product from '../../pages/Product';
+import SignUp from '../../pages/SignUp';
 
 // import { Container } from './styles';
 
- function Routers() {
+ function Routers({isAuthenticated}) {
 
-  // const navigate = useNavigate()
-
-
-  const {authenticated} = useContext(AuthContext);
 
    const router = createBrowserRouter(
     [
       {
         path:"/",
-        element: <Home />,
-        
+        element:  <Home /> 
       },
 
       {
         path:"/new-product",
-        element: <NewProduct />
+        element:  <NewProduct /> 
       },
     
     {
       path: "/product/:id",
-      element: <Product />  
+      element:   <Product /> 
     },
   
     {
       path: "/login",
       element: <Login />
-    }] 
+    },
+  
+    {
+      path: "/register",
+      element: <SignUp />
+    }
+  ] 
   )
 
 

@@ -3,10 +3,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
 import "./styles.css"
 
-function Header() {
+function Header({user}) {
 
   const navigate = useNavigate();
-  const {handleLogout} = useContext(AuthContext);
+  const {handleLogout, setAuthenticated} = useContext(AuthContext);
 
   function handleClick() {
     console.log('clicou')

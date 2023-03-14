@@ -5,17 +5,18 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import PageTitle from '../../components/PageTitle';
 import { AuthContext } from '../../contexts/auth';
-import { authUser } from '../../services/auth';
-import screenImage from "./../../assets/pictures/login-background.jpg";
+import screenImage from "./../../assets/pictures/register-background.jpg";
 
-import './styles.css';
 
-function Login() {
+function SignUp() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("")
+
   const [error, setError] = useState(false)
 
-  const {authenticated, handleLogin, setAuthenticated} = useContext(AuthContext);
+  const {authenticated, handleRegister, setAuthenticated} = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -32,8 +33,8 @@ function Login() {
     }
     else{
       try {
-        const res = await handleLogin(user, password)
-        console.log("Mandou usuário")
+        const res = await handleRegister(user, name, lastName, password)
+        navigate("/login")
       }
       catch(error){
         setError(error)
@@ -46,7 +47,7 @@ function Login() {
     <div className='auth-screen'>
 
       <section className='auth-content'>
-        <PageTitle text={`Faça login para entrar`}/>
+        <PageTitle text={`Registre-se`}/>
         <form className='form-login' onSubmit={(e) => handleSubmit(e)}>
           <Input
           label={`E-mail:`}
@@ -54,6 +55,21 @@ function Login() {
           setValue={setUser}
           placeholder={`Insira seu e-mail`}
           />
+
+          <Input
+          label={`Nome:`}
+          value={name}
+          setValue={setName}
+          placeholder={`Insira seu nome`}
+          />
+
+          <Input
+          label={`Sobrenome:`}
+          value={lastName}
+          setValue={setLastName}
+          placeholder={`Insira seu sobrenome`}
+          />
+
           <Input 
           label={`Senha:`}
           type={`password`}
@@ -64,7 +80,7 @@ function Login() {
           {error && <span className='error-message'>{error}</span>}
           <Button text={`Entrar`}/>
 
-          <span>Não possui conta? <NavLink to={`/register`}>Registre-se</NavLink>.</span>
+          <span>Já possui conta? <NavLink to={`/login`}>Entre</NavLink>.</span>
         </form>
       </section>
 
@@ -75,4 +91,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
