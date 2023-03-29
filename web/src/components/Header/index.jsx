@@ -9,7 +9,6 @@ function Header({user}) {
   const {handleLogout, setAuthenticated} = useContext(AuthContext);
 
   function handleClick() {
-    console.log('clicou')
     handleLogout();
     return navigate("/login")
   }
@@ -24,8 +23,9 @@ function Header({user}) {
           </div>
 
             <nav className='sidebar-menu'>
-              <NavLink to={"/"}>Estoque</NavLink>
-              <NavLink to={"/new-product"}>Adicionar Produto</NavLink>
+              <NavLink to="/">Estoque</NavLink>
+              <NavLink to="/new-product">Adicionar Produto</NavLink>
+              <NavLink to="/new-order">Novo Pedido</NavLink>
             </nav>
 
         <div onClick={handleClick} className="exit-button">Sair</div>

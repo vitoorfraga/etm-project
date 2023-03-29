@@ -2,13 +2,20 @@
   width: 100%;
   border-radius: 8px;
   padding: 8px;
-  border: 3px dotted var(--gray);
+  border: 2px solid var(--gray);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow);
   gap: 16px;
   position: relative;
+  
+
+  transition: box-shadow .3s ease;
+}
+
+.product-card:hover{
+  box-shadow: none;
 }
 
 .product-header{
@@ -79,3 +86,89 @@
   border-radius: 8px;
   color: var(--white);
 }
+
+
+
+/* ============ */
+
+.order-card{
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.order-card .product-header{
+  flex-direction: column !important;
+  align-items: center;
+}
+
+.order-card .product-header .product-name{
+
+}
+
+.order-card .product-header .categorie{
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.card-categorie-img{
+  min-width: 150px;
+  min-height: 150px;
+  margin: 0 auto;
+}
+
+.order-card .product-body{
+  display: flex;
+}
+
+.add-to-order-button{
+  width: 100%;
+  background-color: var(--green);
+  border: none;
+  padding: 12px 0;
+  border-radius: 4px;
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.count{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  margin-top: 8px;
+
+  font-size: 1.6rem;
+}
+
+.count button{
+  border: none;
+  cursor: pointer;
+
+  background-color: var(--gray);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.count-button-increment{
+  color: var(--purple);
+  font-weight: 600;
+  font-size: 2.1rem;
+}
+
+/* .product-card{
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px;
+  border: 2px solid var(--gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  gap: 16px;
+  position: relative;
+  
+
+  transition: box-shadow .3s ease;
+} */

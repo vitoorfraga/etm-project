@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider, useNavigate } from 'reac
 import { AuthContext, AuthProvider } from '../../contexts/auth';
 import Home from '../../pages/Home';
 import Login from '../../pages/Login';
+import NewOrder from '../../pages/NewOrder';
 import NewProduct from '../../pages/NewProduct';
 import Product from '../../pages/Product';
 import SignUp from '../../pages/SignUp';
@@ -16,7 +17,7 @@ import SignUp from '../../pages/SignUp';
     [
       {
         path:"/",
-        element:  <Home /> 
+        element:  <Home />,
       },
 
       {
@@ -24,21 +25,26 @@ import SignUp from '../../pages/SignUp';
         element:  <NewProduct /> 
       },
     
-    {
-      path: "/product/:id",
-      element:   <Product /> 
-    },
+      {
+        path: "/product/:id",
+        element:   <Product /> 
+      },
+
+      {
+        path: "new-order",
+        element: <NewOrder />
+      },
   
-    {
-      path: "/login",
-      element: <Login />
-    },
+      {
+        path: "/login",
+        element: <Login />
+      },
   
-    {
-      path: "/register",
-      element: <SignUp />
-    }
-  ] 
+      {
+        path: "/register",
+        element: <SignUp />
+      }
+    ] 
   )
 
 

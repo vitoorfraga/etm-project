@@ -2,16 +2,23 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/Header';
+import Order from '../../components/Order';
 import PageTitle from '../../components/PageTitle';
 import ProductCard from '../../components/ProductCard';
 import Searchbar from '../../components/Searchbar';
+
+import { ReactComponent as BagSvg } from './../../assets/icons/shopping-bag.svg';
+
+
 import "./styles.css"
 
-function Home() {
+function NewOrder() {
 
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [loadingData, setLoadingData] = useState(true)
+
+  const [orderVisibility, setOrderVisibility] = useState(false)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("user_token"))
@@ -22,20 +29,27 @@ function Home() {
       }
     })
     .then(res => {
+      console.log(res)
+      console.log(res.data.products.length)
       setLoadingData(false)
       setProducts(res.data.products)
     })
     .catch(err => {
+      console.log(err)
     })
   }, [])
 
+  const handleClick = () => {
+    setOrderVisibility(true)
+  }
+
   return (
     <>
-    <Helmet title='Estoque | ETM' />
+    <Helmet title='Novo Pedido | ETM' />
     <div className="main-grid">
       <Header/>
-      <main className='storage-page container'>
-        <PageTitle text={`Seus Produtos`} />
+      <main className='order-page container'>
+        <PageTitle text={`Novo Pedido`} />
         <div className="search-bar">
 
         </div>
@@ -43,7 +57,7 @@ function Home() {
         <div className="search-bar">
           <Searchbar />
         </div>
-        <div className="product-list" style={{marginTop: "32px"}}>
+        <div className="product-list order-list" style={{marginTop: "32px"}}>
         {loadingData && <p>Carregando seus produtos 🌼</p>}
 
         {products.map((item) => {
@@ -55,39 +69,28 @@ function Home() {
             price={item.price}
             quantity={item.quantity}
             category={item.category}
+            order={true}
             />
-
           );
         })}
-
+        
         </div>
         {products.length === 0 && <p style={{background: "#e9e9e9", fontSize: "1.4rem", width: "fit-content", padding: "8px"}}>Você ainda não possui produtos cadastrados 🤔.</p>}
-        {/* <table className='table-products-list'>
-          <thead className='table-header'>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Categoria</th>
-          </thead>
-          
-          <tbody>
-            {products.map((product) => {
-              return(
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.category}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> */}
 
+        <button onClick={handleClick} className='open-order-button'><BagSvg /></button>
+
+        {orderVisibility &&
+          <div className="new-order-container">
+            <Order 
+              status={orderVisibility} 
+              setStatus={setOrderVisibility}
+            />
+          </div>
+        }
       </main>
     </div>
     </>
   );
 }
 
-export default Home;
+export default NewOrder;

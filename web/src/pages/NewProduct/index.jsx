@@ -8,7 +8,6 @@ import './styles.css';
 
 function NewProduct() {
 
-
   return (
     <>
     <Helmet title='Novo Produto | ETM' />

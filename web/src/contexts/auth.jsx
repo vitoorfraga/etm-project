@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
 
 export const AuthContext = React.createContext();
 
@@ -13,7 +12,6 @@ export function AuthProvider ({children}) {
 
   async function handleLogin(user, password){
 
-    console.log(user, password)
     try{
       const res = await axios.post("http://localhost:3000/auth/authenticate", {
         email: user,
@@ -28,7 +26,6 @@ export function AuthProvider ({children}) {
       return window.location.href = "/"
     }
     catch(error) {
-      console.log('retornou erro')
       return error
     }
 
@@ -49,7 +46,6 @@ export function AuthProvider ({children}) {
     }
 
     catch(error) {
-      console.log(error)
     }
 
     }

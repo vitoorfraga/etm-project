@@ -49,12 +49,9 @@ function NewProductForm() {
   
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    console.log('Enviou formulário')
 
     if(name.length > 1 && price.length > 1 && size.length !== "" && category.length > 1 && quantity !== ""){
-      console.log('ENTROU AQUI')
       const res = await createProduct(name, price, quantity, size, category);
-      console.log(res)
       if(res){
         notifyOk()
       } else{

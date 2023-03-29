@@ -60,7 +60,6 @@ function EditProductForm({id}) {
         }
       })
       .then(res => {
-        console.log(res)
         setName(res.data.product.name);
         setPrice(res.data.product.price);
         setQuantity(res.data.product.quantity);

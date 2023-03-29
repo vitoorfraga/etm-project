@@ -1,0 +1,9 @@
+.order-page{
+  position: relative;
+  height: 100%;
+}
+
+.product-list.order-list{
+  grid-template-columns: repeat(5, 1fr);
+  gap: 36px;
+}
