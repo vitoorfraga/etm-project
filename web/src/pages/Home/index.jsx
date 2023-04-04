@@ -11,6 +11,7 @@ function Home() {
 
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [searchString, setSearchString] = useState("");
   const [loadingData, setLoadingData] = useState(true)
 
   useEffect(() => {
@@ -29,6 +30,22 @@ function Home() {
     })
   }, [])
 
+  useEffect(() => {
+    console.log(searchString)
+    let dataTemp = products.filter((item) => {
+      const formatSearchString = searchString.toLocaleLowerCase()
+      console.log(formatSearchString)
+      const formatItemName = item.name.toLocaleLowerCase().replaceAll('-', ' ')
+      console.log(formatItemName)
+      if (formatItemName.includes(formatSearchString)) {
+        console.log(item)
+        return item
+      }
+    })
+
+    setFilterProducts(dataTemp)
+  }, [searchString])
+
   return (
     <>
     <Helmet title='Estoque | ETM' />
@@ -41,12 +58,65 @@ function Home() {
         </div>
 
         <div className="search-bar">
-          <Searchbar />
+          <Searchbar 
+            value={searchString}
+            setValue={setSearchString}
+          />
         </div>
         <div className="product-list" style={{marginTop: "32px"}}>
         {loadingData && <p>Carregando seus produtos 🌼</p>}
 
-        {products.map((item) => {
+        {
+          searchString == "" ? 
+          products.map((item) => {
+            return(
+              <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              category={item.category}
+              inView
+              />
+  
+            );
+          })
+
+          : 
+        
+          filterProducts.map((item) => {
+            return (
+              <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              category={item.category}
+              inView
+              />
+            )
+          })
+        }
+
+        {/* {filterProducts.length >= 1 &&
+          filterProducts.map((item) => {
+            return (
+              <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              category={item.category}
+              inView
+              />
+            )
+          })
+        }
+        {
+        products.map((item) => {
           return(
             <ProductCard
             key={item.id}
@@ -55,34 +125,16 @@ function Home() {
             price={item.price}
             quantity={item.quantity}
             category={item.category}
+            inView
             />
 
           );
-        })}
+        })
+        } */}
 
         </div>
         {products.length === 0 && <p style={{background: "#e9e9e9", fontSize: "1.4rem", width: "fit-content", padding: "8px"}}>Você ainda não possui produtos cadastrados 🤔.</p>}
-        {/* <table className='table-products-list'>
-          <thead className='table-header'>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Categoria</th>
-          </thead>
-          
-          <tbody>
-            {products.map((product) => {
-              return(
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.category}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> */}
+
 
       </main>
     </div>

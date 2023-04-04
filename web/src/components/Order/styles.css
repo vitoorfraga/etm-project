@@ -1,10 +1,12 @@
 .order{
+  width: 27%;
   position: fixed;
   bottom: 0;
+  right: 0;
 
-  width: 81.5%;
-  height: 250px;
-  background-color: var(--gray);
+
+  height: 95%;
+  background-color: var(--white);
 
   border-radius: 0 8px 0 0;
 
@@ -19,7 +21,7 @@
 
 .order-header button{
   position: absolute;
-  right: -20px;
+  left: -20px;
   top: -20px;
 
   width: 40px;
@@ -30,12 +32,22 @@
 
   box-shadow: var(--shadow);
   background-color: var(--gray);
+  
 }
 
 .order-header button:hover{
   cursor: pointer;
   background-color: var(--purple);
   color: var(--background-color);
+}
+
+.finished-order button{
+  width: 90%;
+  margin: 16px auto 16px auto;
+
+  background-color: vaR(--purple);
+  color: var(--white);
+  border: none;
 }
 
 .open-order-button{
@@ -59,6 +71,17 @@
   background-color: var(--purple);
   color: var(--background-color);
   cursor: pointer;
+}
+
+.order-list-body{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 8px;
+
+  padding: 16px;
+
+  overflow-y: scroll;
+  height: 100%;
 }
 
 @keyframes orderAnimation {

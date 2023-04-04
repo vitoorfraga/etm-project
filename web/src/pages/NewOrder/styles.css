@@ -4,6 +4,6 @@
 }
 
 .product-list.order-list{
-  grid-template-columns: repeat(5, 1fr);
-  gap: 36px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }

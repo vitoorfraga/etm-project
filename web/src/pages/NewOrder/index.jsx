@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/Header';
 import Order from '../../components/Order';
@@ -9,16 +9,19 @@ import Searchbar from '../../components/Searchbar';
 
 import { ReactComponent as BagSvg } from './../../assets/icons/shopping-bag.svg';
 
-
 import "./styles.css"
+import { orderContext } from '../../contexts/OrderContext';
 
 function NewOrder() {
 
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [searchString, setSearchString] = useState("");
   const [loadingData, setLoadingData] = useState(true)
-
   const [orderVisibility, setOrderVisibility] = useState(false)
+  const [orderList, setOrderList] = useState([])
+
+  const {order, setOrder} = useContext(orderContext)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("user_token"))
@@ -39,8 +42,28 @@ function NewOrder() {
     })
   }, [])
 
+  useEffect(() => {
+    console.log(searchString)
+    let dataTemp = products.filter((item) => {
+      const formatSearchString = searchString.toLocaleLowerCase()
+      console.log(formatSearchString)
+      const formatItemName = item.name.toLocaleLowerCase().replaceAll('-', ' ')
+      console.log(formatItemName)
+      if (formatItemName.includes(formatSearchString)) {
+        console.log(item)
+        return item
+      }
+    })
+
+    setFilterProducts(dataTemp)
+  }, [searchString])
+
   const handleClick = () => {
     setOrderVisibility(true)
+  }
+
+  const addToOrder = (product) => {
+    console.log(product)
   }
 
   return (
@@ -53,29 +76,47 @@ function NewOrder() {
         <div className="search-bar">
 
         </div>
-
         <div className="search-bar">
           <Searchbar />
         </div>
         <div className="product-list order-list" style={{marginTop: "32px"}}>
         {loadingData && <p>Carregando seus produtos 🌼</p>}
 
-        {products.map((item) => {
-          return(
-            <ProductCard
-            key={item.id}
-            id={item.id}
-            title={item.name}
-            price={item.price}
-            quantity={item.quantity}
-            category={item.category}
-            order={true}
-            />
-          );
-        })}
+        {
+          searchString == "" ? 
+          products.map((item) => {
+            return(
+              <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              category={item.category}
+              inView
+              />
+  
+            );
+          })
+
+          : 
+        
+          filterProducts.map((item) => {
+            return (
+              <ProductCard
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              price={item.price}
+              quantity={item.quantity}
+              category={item.category}
+              inView
+              />
+            )
+          })
+        }
         
         </div>
-        {products.length === 0 && <p style={{background: "#e9e9e9", fontSize: "1.4rem", width: "fit-content", padding: "8px"}}>Você ainda não possui produtos cadastrados 🤔.</p>}
 
         <button onClick={handleClick} className='open-order-button'><BagSvg /></button>
 
@@ -84,7 +125,8 @@ function NewOrder() {
             <Order 
               status={orderVisibility} 
               setStatus={setOrderVisibility}
-            />
+            >   
+            </Order>
           </div>
         }
       </main>
