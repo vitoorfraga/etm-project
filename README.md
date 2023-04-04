@@ -10,7 +10,7 @@ A Top Models é uma empresa de pequeno porte localizado na zona-oeste de São Pa
 * Matheus Nogueira de Oliveira  - RA: 2100772
 
 ## Tecnologias Utilizadas 💻
-* React.js (Vite.js)
-* Node.js
-* Prisma.io
-* SQLite
+* [React.js (Vite.js)](https://vitejs.dev/)
+* [Node.js](https://nodejs.org/en)
+* [Prisma.io](https://www.prisma.io/)
+* [SQLite](https://sqlite.org/index.html)
