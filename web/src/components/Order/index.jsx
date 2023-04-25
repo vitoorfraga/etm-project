@@ -3,6 +3,8 @@ import "./styles.css"
 import Button from '../Button'
 import { orderContext } from '../../contexts/OrderContext'
 import ProductCard from '../ProductCard'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
 
 function Order({status, setStatus, children}) {
 
@@ -12,14 +14,43 @@ function Order({status, setStatus, children}) {
 
   let orderAmount = 0
 
+  const notifyOk = () => toast.success("Produto criado com sucesso!");
+
   const handleClick = () => {
     setStatus(false)
   }
 
   const sumTotalAmount = order.map(item => {
-    console.log(item.price)
     orderAmount = orderAmount + (item.price * item.count)
   })
+
+  const handleCreateOrder = () => {
+    console.log(order[0])
+    const newOrder = {
+      "productName": order[0].name,
+      "productId": order[0].id,
+      // "size": "GG",
+      "quantity": order[0].count,
+      "amount": order[0].price * order[0].count,
+      "category": order[0].category
+    }
+
+    console.log(newOrder)
+
+    const token = JSON.parse(localStorage.getItem("user_token"))
+
+    axios.post(`http://localhost:3000/order/new-order`, newOrder, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }})
+      .then(res => {
+        notifyOk()
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   return (
     <div className='order'>
@@ -28,14 +59,14 @@ function Order({status, setStatus, children}) {
       </div>
 
       <div className="finished-order">
-        <Button text="Finalizar Pedido"/>
+        <Button text="Finalizar Pedido" onClick={handleCreateOrder}/>
+        <span className='clear-order' onClick={() => setOrder([])}>Limpar Pedido</span>
       </div>
 
       <div className="order-amount">
         <p> Total: <span>R$ {orderAmount} </span></p>
       </div>
 
-      <button onClick={() => console.log(orderAmount)}>Teste</button>
 
       <div className="order-list-body">
       {order.map((item) => {
@@ -54,6 +85,7 @@ function Order({status, setStatus, children}) {
         );
       })}
       </div>
+      <ToastContainer />
     </div>
   )
 }

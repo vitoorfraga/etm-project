@@ -1,0 +1,30 @@
+.wrapper {
+  width: 35rem;
+  height: 15rem;
+
+  background-color: #fff;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1.6rem;
+}
+
+.id {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color-1);
+}
+
+
+
+.body {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}

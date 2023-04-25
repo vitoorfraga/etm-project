@@ -23,10 +23,11 @@ function Header({user}) {
           </div>
 
             <nav className='sidebar-menu'>
-              <small>Produtos</small>
-              <NavLink to="/">Estoque</NavLink>
-              <NavLink to="/new-product">Adicionar Produto</NavLink>
-              <small>Estoque</small>
+              <small className='menu-category'>Estoque</small>
+              <NavLink to="/">Ver Estoque</NavLink>
+              <NavLink to="/new-product">Novo Produto</NavLink>
+              <small className='menu-category'>Pedidos</small>
+              <NavLink to="/orders">Ver Pedidos</NavLink>
               <NavLink to="/new-order">Novo Pedido</NavLink>
             </nav>
 

@@ -46,6 +46,27 @@ header .container{
 	height: 100%;
 }
 
+.menu-category {
+	position: relative;
+	font-size: 1.2rem;
+	color: #7e7d7d;
+	font-weight: 700;
+	margin-top: 1.5rem;
+}
+
+.menu-category::after {
+	content: "";
+	display: block;
+	width: .5rem;
+	height: 1rem;
+	background-color: var(--purple);
+	margin-bottom: 1rem;
+	position: absolute;
+	top: .4rem;
+	left: -1rem;
+
+}
+
 .sidebar-menu a{
 	font-size: 1.6rem;
 	color: var(--text-color-1);

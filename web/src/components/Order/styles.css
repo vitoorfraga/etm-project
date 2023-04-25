@@ -128,3 +128,15 @@
     bottom: 0;
   }
 }
+
+.clear-order {
+  text-align: center;
+  display: block;
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.clear-order:hover{
+  cursor: pointer;
+  color: var(--red);
+}

@@ -11,6 +11,7 @@ router.use(auth)
 
 // => Get All Products.
 router.get('/', async (request, response) => {
+  console.log('entrouuu')
   const userId = request.userId;
   const allProducts = await prisma.product.findMany({
     where: {

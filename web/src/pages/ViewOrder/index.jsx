@@ -9,32 +9,34 @@ import Searchbar from '../../components/Searchbar';
 
 import { ReactComponent as BagSvg } from './../../assets/icons/shopping-bag.svg';
 
-import "./styles.css"
 import { orderContext } from '../../contexts/OrderContext';
+import OrderItem from '../../components/OrderItem';
 
-function NewOrder() {
+import styles from './ViewOrder.module.css'
+
+function ViewOrder() {
 
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchString, setSearchString] = useState("");
   const [loadingData, setLoadingData] = useState(true)
   const [orderVisibility, setOrderVisibility] = useState(false)
+  const [orders, setOrders] = useState([])
 
   const {order, setOrder} = useContext(orderContext)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("user_token"))
 
-    axios.get(`http://localhost:3000/storage/`, {
+    axios.get(`http://localhost:3000/order/`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
     })
     .then(res => {
       console.log(res)
-      console.log(res.data.products.length)
       setLoadingData(false)
-      setProducts(res.data.products)
+      setOrders(res.data.orders)
     })
     .catch(err => {
       console.log(err)
@@ -63,73 +65,44 @@ function NewOrder() {
     console.log(product)
   }
 
+  const renderOrderList = orders.map(((item) => {
+    console.log('isajdiajsdia')
+    return(
+      <OrderItem
+        key={item.id}
+        id={item.id}
+        amount={item.amount}
+        date={item.createdAt}
+        quantity={item.quantity}
+      />
+
+    );
+  }))
+
   return (
     <>
-    <Helmet title='Novo Pedido | ETM' />
+    <Helmet title='Pedidos | ETM' />
     <div className="main-grid">
       <Header/>
       <main className='order-page container'>
-        <PageTitle text={`Novo Pedido`} />
+        <PageTitle text={`Pedidos`} />
         <div className="search-bar">
 
         </div>
         <div className="search-bar">
-          <Searchbar />
+          {/* <Searchbar /> */}
         </div>
         <div className="product-list order-list" style={{marginTop: "32px"}}>
         {loadingData && <p>Carregando seus produtos 🌼</p>}
-
-        {
-          searchString == "" ? 
-          products.map((item) => {
-            return(
-              <ProductCard
-              key={item.id}
-              id={item.id}
-              title={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              category={item.category}
-              addToOrder={true}
-              />
-  
-            );
-          })
-
-          : 
         
-          filterProducts.map((item) => {
-            return (
-              <ProductCard
-              key={item.id}
-              id={item.id}
-              title={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              category={item.category}
-              addToOrder={true}
-              />
-            )
-          })
-        }
-        
+        {renderOrderList}
         </div>
 
-        <button onClick={handleClick} className='open-order-button'><BagSvg /></button>
 
-        {orderVisibility &&
-          <div className="new-order-container">
-            <Order 
-              status={orderVisibility} 
-              setStatus={setOrderVisibility}
-            >   
-            </Order>
-          </div>
-        }
       </main>
     </div>
     </>
   );
 }
 
-export default NewOrder;
+export default ViewOrder;

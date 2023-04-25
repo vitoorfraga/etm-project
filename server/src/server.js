@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import cors from "cors"
 import authController from "./app/controllers/authController.js";
 import storageController from "./app/controllers/storageController.js";
+import orderController from "./app/controllers/orderController.js";
 
 
 
@@ -15,6 +16,8 @@ app.use(cors())
 
 authController(app)
 storageController(app)
+orderController(app)
+
 
 // => Criar produto no banco de dados.
 app.post('/etm-create-product', async (request, response) => {
@@ -46,8 +49,6 @@ app.get("/etm-storage", async (request, response) => {
     allProducts
   });
 })
-
-
 
 // => Atualizar um produto
 app.patch("/etm-update-product/:id", async (request, response) => {

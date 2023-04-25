@@ -11,6 +11,7 @@ export async function createProduct(name, price, quantity, size, category){
     category: category,
   }
 
+  console.log(token)
   const response = await axios.post(`http://localhost:3000/storage/create-product`, data, {
     headers: {
       "Authorization": `Bearer ${token}`

@@ -7,6 +7,7 @@ import NewOrder from '../../pages/NewOrder';
 import NewProduct from '../../pages/NewProduct';
 import Product from '../../pages/Product';
 import SignUp from '../../pages/SignUp';
+import ViewOrder from '../../pages/ViewOrder';
 
 // import { Container } from './styles';
 
@@ -33,6 +34,11 @@ import SignUp from '../../pages/SignUp';
       {
         path: "new-order",
         element: <NewOrder />
+      },
+
+      {
+        path: "orders",
+        element: <ViewOrder />
       },
   
       {
