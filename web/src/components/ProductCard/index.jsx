@@ -15,6 +15,7 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
   const [productOptionVisibility, setProductOptionVisibility] = useState(false)
   const [count, setCount] = useState(1);
   const [quantityMessageAlert, setQuantityMessageAlert] = useState(false)
+  const [disabled, setDisabled] = useState(false);
   
   const { order, setOrder } = useContext(orderContext);
 
@@ -58,7 +59,6 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
   }
 
   const handleAddToOrder = () => {
-    console.log(id ,title, price, category, size, count, quantity)
     const dataTemp = order
     const product = {
       id,
@@ -70,8 +70,8 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
       size
     }
 
-    dataTemp.push(product)
-    setOrder(dataTemp)
+    setOrder(() => [...order, product])
+    // setOrder(dataTemp)
   }
 
   const categoriesOptions = [
@@ -93,6 +93,36 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
     {name: "Meias" , value: "Meias"},
     {name: "Outros" , value: "Outros"},
   ]
+
+  const handleAddProductToOrderWithMaxQuantity = () => {
+    const product = {
+      id,
+      name: title,
+      category,
+      price,
+      count,
+      quantityTotal: quantity,
+      size
+    }
+
+    if (order.length === 0) {
+      setOrder(() => [...order, product])
+    } else {
+      const verifyOrderAndProductQuantity = order && order.filter(item => {
+        if(product.id !== item.id){
+          console.log(`${product.name}: ${product.count}`)
+          console.log(`${item.name}: ${item.count}`) 
+          setOrder(() => [...order, product])
+        }
+      })
+    }
+  }
+
+  const handleRemoveFromOrder = (product) => {
+    console.log('ativou')
+    console.log(product)
+    // setOrder(() => order.splice(product, 1))
+  }
 
 
   return (
@@ -154,9 +184,7 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
               </div>
               }
 
-              {inOrder && 
-              <span>Unidades: {quantityTotal}</span>
-              }
+              {inOrder && <span>Unidades: {quantityTotal}</span>}
               
             <div>
             </div>
@@ -169,13 +197,15 @@ function ProductCard({id ,title, size, price, category, quantity, quantityTotal,
           {addToOrder &&
           <Button 
             text="Adicionar ao pedido"
-            onClick={handleAddToOrder}
+            onClick={handleAddProductToOrderWithMaxQuantity}
+            disabled={disabled ? true : false}
           />
           }
 
           {inOrder && 
           <div className="remove">
-            <Button 
+            <Button
+              onClick={() => handleRemoveFromOrder(id)}
               text="Remover"
             />
           </div>

@@ -5,10 +5,9 @@
   right: 0;
 
 
-  height: 95%;
+  height: 100%;
   background-color: var(--white);
-
-  border-radius: 0 8px 0 0;
+  border: 1px solid var(--gray);
 
   box-shadow: var(--shadow);
 
@@ -22,10 +21,10 @@
 .order-header button{
   position: absolute;
   left: -20px;
-  top: -20px;
+  top: 20px;
 
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 
   border: none;
@@ -73,15 +72,44 @@
   cursor: pointer;
 }
 
+.order-amount {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 1.6rem;
+}
+
+.order-amount span {
+  font-weight: 700;
+}
+
 .order-list-body{
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 
   padding: 16px;
 
   overflow-y: scroll;
   height: 100%;
+  width: 100%; 
+}
+
+.order-list-body::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--white);
+}
+
+.order-list-body::-webkit-scrollbar-thumb {
+  background-color: var(--purple);
+  border-radius: 8px;
+  width: 30%;
+  height: .2rem;
+}
+
+
+.order-list-body .product-card{
+  height: fit-content;
 }
 
 @keyframes orderAnimation {

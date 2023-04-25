@@ -19,7 +19,6 @@ function NewOrder() {
   const [searchString, setSearchString] = useState("");
   const [loadingData, setLoadingData] = useState(true)
   const [orderVisibility, setOrderVisibility] = useState(false)
-  const [orderList, setOrderList] = useState([])
 
   const {order, setOrder} = useContext(orderContext)
 
@@ -42,13 +41,11 @@ function NewOrder() {
     })
   }, [])
 
+  // => Filtrar Produtos
   useEffect(() => {
-    console.log(searchString)
     let dataTemp = products.filter((item) => {
       const formatSearchString = searchString.toLocaleLowerCase()
-      console.log(formatSearchString)
       const formatItemName = item.name.toLocaleLowerCase().replaceAll('-', ' ')
-      console.log(formatItemName)
       if (formatItemName.includes(formatSearchString)) {
         console.log(item)
         return item
@@ -69,6 +66,7 @@ function NewOrder() {
   return (
     <>
     <Helmet title='Novo Pedido | ETM' />
+    <button onClick={() => console.log(order)}>Teste hehe</button>
     <div className="main-grid">
       <Header/>
       <main className='order-page container'>
@@ -93,7 +91,7 @@ function NewOrder() {
               price={item.price}
               quantity={item.quantity}
               category={item.category}
-              inView
+              addToOrder={true}
               />
   
             );
@@ -110,7 +108,7 @@ function NewOrder() {
               price={item.price}
               quantity={item.quantity}
               category={item.category}
-              inView
+              addToOrder={true}
               />
             )
           })
