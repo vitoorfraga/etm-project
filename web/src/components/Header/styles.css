@@ -51,7 +51,7 @@ header .container{
 	font-size: 1.2rem;
 	color: #7e7d7d;
 	font-weight: 700;
-	margin-top: 1.5rem;
+	margin: 1.5rem 0;
 }
 
 .menu-category::after {
@@ -64,7 +64,7 @@ header .container{
 	position: absolute;
 	top: .4rem;
 	left: -1rem;
-
+	border-radius: 8px;
 }
 
 .sidebar-menu a{

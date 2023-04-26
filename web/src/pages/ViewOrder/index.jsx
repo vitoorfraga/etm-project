@@ -22,6 +22,7 @@ function ViewOrder() {
   const [loadingData, setLoadingData] = useState(true)
   const [orderVisibility, setOrderVisibility] = useState(false)
   const [orders, setOrders] = useState([])
+  const [noOrders, setNoOrders] = useState(false)
 
   const {order, setOrder} = useContext(orderContext)
 
@@ -34,7 +35,10 @@ function ViewOrder() {
       }
     })
     .then(res => {
-      console.log(res)
+      console.log(res.data.orders.length)
+      if(res.data.orders.length === 0) {
+        setNoOrders(true)
+      }
       setLoadingData(false)
       setOrders(res.data.orders)
     })
@@ -66,7 +70,6 @@ function ViewOrder() {
   }
 
   const renderOrderList = orders.map(((item) => {
-    console.log('isajdiajsdia')
     return(
       <OrderItem
         key={item.id}
@@ -97,6 +100,8 @@ function ViewOrder() {
         
         {renderOrderList}
         </div>
+
+        {noOrders && <p style={{fontSize: '1.6rem'}}>Você ainda não realizou nenhum pedido.</p>}
 
 
       </main>
