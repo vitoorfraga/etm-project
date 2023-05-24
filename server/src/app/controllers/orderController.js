@@ -27,9 +27,13 @@ router.get('/', async (request, response) => {
 router.post('/new-order', async (request, response) => {
 
   const userId = request.userId
-  const { productName, size, quantity, amount, category, productId } = request.body;
+  const { productName, size, quantity, amount, category, productId, qtdTotal } = request.body;
+
+  const idProduto = request.body.productId
+
+  console.log(productId, quantity)
   
-  console.log(productName, size, quantity, amount, category);
+  console.log(productName, size, quantity, amount, category, qtdTotal);
   console.log(userId)
   
   try {
@@ -39,9 +43,17 @@ router.post('/new-order', async (request, response) => {
         productId: productId,
         productName: productName,
         amount: amount,
-        quantity: quantity,    
+        quantity: quantity,
       }
     })
+
+    const productUpdate = await prisma.product.update({
+      where: { id: parseInt(productId)},
+      data: {
+        quantity: qtdTotal - quantity
+      }
+    })
+
     response.status(200).send({
       message: "Produto Cadastrado com sucesso."
     })

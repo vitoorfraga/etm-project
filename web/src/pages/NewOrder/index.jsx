@@ -82,6 +82,7 @@ function NewOrder() {
         {
           searchString == "" ? 
           products.map((item) => {
+            console.log(item)
             return(
               <ProductCard
               key={item.id}

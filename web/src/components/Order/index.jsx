@@ -32,7 +32,8 @@ function Order({status, setStatus, children}) {
       // "size": "GG",
       "quantity": order[0].count,
       "amount": order[0].price * order[0].count,
-      "category": order[0].category
+      "category": order[0].category,
+      "qtdTotal": order[0].quantityTotal
     }
 
     console.log(newOrder)
@@ -70,6 +71,7 @@ function Order({status, setStatus, children}) {
 
       <div className="order-list-body">
       {order.map((item) => {
+        console.log(item)
         return(
           <ProductCard
             key={item.id}
