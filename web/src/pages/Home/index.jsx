@@ -86,17 +86,20 @@ function Home() {
           : 
         
           filterProducts.map((item) => {
-            return (
-              <ProductCard
-              key={item.id}
-              id={item.id}
-              title={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              category={item.category}
-              inView
-              />
-            )
+            console.log('dasdasd')
+            if(item.quantity >= 1) {
+              return (
+                <ProductCard
+                  key={item.id}
+                  id={item.id}
+                  title={item.name}
+                  price={item.price}
+                  quantity={item.quantity}
+                  category={item.category}
+                  inView
+                />
+              )
+            }
           })
         }
 

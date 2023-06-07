@@ -82,19 +82,20 @@ function NewOrder() {
         {
           searchString == "" ? 
           products.map((item) => {
-            console.log(item)
-            return(
-              <ProductCard
-              key={item.id}
-              id={item.id}
-              title={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              category={item.category}
-              addToOrder={true}
-              />
-  
-            );
+            if(item.quantity >= 1) {
+              return(
+                <ProductCard
+                key={item.id}
+                id={item.id}
+                title={item.name}
+                price={item.price}
+                quantity={item.quantity}
+                category={item.category}
+                addToOrder={true}
+                />
+    
+              );
+            }
           })
 
           : 

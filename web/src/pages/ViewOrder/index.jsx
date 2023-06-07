@@ -70,16 +70,18 @@ function ViewOrder() {
   }
 
   const renderOrderList = orders.map(((item) => {
-    return(
-      <OrderItem
-        key={item.id}
-        id={item.id}
-        amount={item.amount}
-        date={item.createdAt}
-        quantity={item.quantity}
-      />
-
-    );
+    if(item.quantity >= 1 ) {
+      return(
+        <OrderItem
+          key={item.id}
+          id={item.id}
+          amount={item.amount}
+          date={item.createdAt}
+          quantity={item.quantity}
+        />
+  
+      );
+    }
   }))
 
   return (
